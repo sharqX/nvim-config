@@ -31,11 +31,10 @@ return {
           "bashls",
 
           -- Kubernetes & Helm
-          "kubernetesls",
           "helm_ls",
 
           -- JS / TS
-          "tsserver",
+          "ts_ls",
 
           -- Go
           "gopls",

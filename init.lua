@@ -6,3 +6,4 @@ vim.wo.relativenumber = true
 
 -- Load Lazy --
 require("config.lazy")
+
