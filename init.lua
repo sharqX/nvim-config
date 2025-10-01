@@ -10,4 +10,3 @@ vim.g.maplocalleader = " "
 
 -- Load Lazy --
 require("config.lazy")
-

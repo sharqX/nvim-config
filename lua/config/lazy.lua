@@ -28,6 +28,8 @@ require("lazy").setup({
     { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
     -- Mini NVIM -- 
     { 'nvim-mini/mini.nvim', version = '*' },
+    -- Treesitter --
+    {"nvim-treesitter/nvim-treesitter", branch = 'master', lazy = false, build = ":TSUpdate"},
     -- Import Plugins -- 
     { import = "plugins" },
   }
