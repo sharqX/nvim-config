@@ -5,8 +5,25 @@ return {
         dependencies = {
             "williamboman/mason.nvim",
             "mason-org/mason-lspconfig.nvim",
+            "saghen/blink.cmp",
         },
         config = function()
+            -- Blink CMP Capabilities
+            local capabilities = require("blink.cmp").get_lsp_capabilities()
+
+            -- Extend with your custom settings
+            capabilities.textDocument = capabilities.textDocument or {}
+            capabilities.textDocument.semanticTokens = vim.tbl_deep_extend(
+                "force",
+                capabilities.textDocument.semanticTokens or {},
+                {
+                    multilineTokenSupport = true,
+                }
+            )
+
+            vim.lsp.config('*', {
+                capabilities = capabilities,
+            })
             -- Mason install/bridge
             require("mason").setup()
             require("mason-lspconfig").setup({
@@ -34,7 +51,7 @@ return {
             vim.lsp.config("bashls", {})
             vim.lsp.config("clangd", {})
             vim.lsp.config("cssls", {})
-            vim.lsp.config("dockerls", {})                  -- Dockerfile
+            vim.lsp.config("dockerls", {})                        -- Dockerfile
             vim.lsp.config("docker_compose_language_service", {}) -- docker-compose YAML
             vim.lsp.config("gopls", {})
             vim.lsp.config("helm_ls", {})

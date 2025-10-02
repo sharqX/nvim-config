@@ -14,7 +14,7 @@ return {
 
 
             -- General
-            keymap("n", "<leader>e", ":Ex<CR>", opts)         -- File explorer
+            keymap("n", "<leader>e", ":Oil<CR>", opts)         -- File explorer
             keymap("n", "<leader>w", ":w<CR>", opts)          -- Save
             keymap("n", "<leader>q", ":q<CR>", opts)          -- Quit
             keymap("n", "<leader>h", ":nohlsearch<CR>", opts) -- Clear highlights
