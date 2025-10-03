@@ -1,4 +1,4 @@
-# 🚀 Modern Neovim Configuration
+# 🚀 My Neovim Configuration
 
 A carefully crafted Neovim configuration built for modern development workflows. This setup provides a powerful, efficient, and beautiful coding environment with intelligent completion, LSP support, and intuitive keybindings.
 
