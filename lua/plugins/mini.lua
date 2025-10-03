@@ -2,7 +2,7 @@
 return {
   {
     -- You already have this
-    'nvim-mini/mini.nvim',     -- (new org name; works with 'echasnovski/mini.nvim' too)
+    'nvim-mini/mini.nvim', -- (new org name; works with 'echasnovski/mini.nvim' too)
     lazy = false,
     config = function()
       -- Statusline
