@@ -108,11 +108,7 @@ return {
 
       null_ls.setup({
         sources = {
-          null_ls.builtins.formatting.black,         -- Python
-          null_ls.builtins.formatting.stylua,        -- Lua
-          null_ls.builtins.formatting.prettier,      -- JS/TS/HTML/C
-          null_ls.builtins.formatting.gofmt,         -- gofmt
-          null_ls.builtins.formatting.terraform_fmt, -- terraform
+          null_ls.builtins.formatting.black, -- Python
         },
       })
     end,
