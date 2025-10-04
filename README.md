@@ -89,8 +89,8 @@ On first startup, Lazy.nvim will automatically install all plugins and Mason wil
 |----------|--------|-------------|
 | `<leader>ff` | Find Files | Open Telescope file finder |
 | `<leader>fg` | Live Grep | Search text across project |
-| `<leader>-ce` | Enable Copilot | Activate GitHub Copilot |
-| `<leader>-cd` | Disable Copilot | Deactivate GitHub Copilot |
+| `<leader>ce` | Enable Copilot | Activate GitHub Copilot |
+| `<leader>cd` | Disable Copilot | Deactivate GitHub Copilot |
 
 ### Built-in Neovim
 - **Normal Mode**: Navigate and edit efficiently
