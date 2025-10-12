@@ -8,18 +8,22 @@ A carefully crafted Neovim configuration built for modern development workflows.
 - **Catppuccin Theme**: Beautiful, modern colorscheme with automatic light/dark mode switching
 - **Mini.nvim Statusline**: Clean and informative status line with icons
 - **Syntax Highlighting**: Advanced syntax highlighting powered by Treesitter
+- **Indent Guides**: Visual indentation lines for better code structure
+- **Mini Icons**: Consistent iconography throughout the interface
 
 ### 🔧 Core Functionality
-- **LSP Integration**: Full Language Server Protocol support with auto-installation
-- **Intelligent Completion**: Blink.cmp for fast, context-aware autocompletion
-- **File Explorer**: Oil.nvim for intuitive file management
-- **Fuzzy Finding**: Telescope for quick file and text searching
-- **Git Integration**: Built-in git configuration and tools
+- **LSP Integration**: Full Language Server Protocol support with auto-installation via Mason
+- **Intelligent Completion**: Blink.cmp for fast, context-aware autocompletion with snippets
+- **File Explorer**: Oil.nvim for intuitive, buffer-based file management
+- **Fuzzy Finding**: Telescope for quick file and text searching across projects
+- **Integrated Terminal**: ToggleTerm for seamless terminal access with PowerShell support
+- **Git Integration**: Advanced git workflow with Fugitive and GitSigns
 
 ### 🤖 AI & Productivity
 - **GitHub Copilot**: AI-powered code suggestions and completion
 - **Treesitter**: Advanced syntax parsing and code understanding
-- **Auto-formatting**: Consistent code formatting across languages
+- **Auto-formatting**: Consistent code formatting with none-ls integration
+- **Code Actions**: Quick fixes and refactoring suggestions
 
 ### 🛠️ Language Support
 Out-of-the-box support for:
@@ -37,11 +41,13 @@ Out-of-the-box support for:
 
 ## 📋 Prerequisites
 
-- **Neovim** >= 0.10.0
-- **Git** (for plugin management)
-- **Node.js** (for some LSP servers)
-- **Python** (for Python LSP support)
-- A **Nerd Font** (for icons - recommended: [JetBrains Mono Nerd Font](https://www.nerdfonts.com/))
+- **Neovim** >= 0.10.0 (recommended: latest stable)
+- **Git** (for plugin management and version control)
+- **Node.js** >= 16.0 (for TypeScript/JavaScript LSP servers)
+- **Python** >= 3.8 (for Python LSP support)
+- **PowerShell** (Windows) or your preferred shell
+- A **Nerd Font** (required for icons - recommended: [JetBrains Mono Nerd Font](https://www.nerdfonts.com/))
+- **GitHub Account** (for Copilot integration)
 
 ## 🚀 Installation
 
@@ -89,8 +95,14 @@ On first startup, Lazy.nvim will automatically install all plugins and Mason wil
 |----------|--------|-------------|
 | `<leader>ff` | Find Files | Open Telescope file finder |
 | `<leader>fg` | Live Grep | Search text across project |
-| `<leader>ce` | Enable Copilot | Activate GitHub Copilot |
-| `<leader>cd` | Disable Copilot | Deactivate GitHub Copilot |
+| `<leader>-ce` | Enable Copilot | Activate GitHub Copilot |
+| `<leader>-cd` | Disable Copilot | Deactivate GitHub Copilot |
+| `<C-\>` | Toggle Terminal | Open/close integrated terminal |
+| `<Esc>` | Exit Terminal Mode | Return to normal mode from terminal |
+
+### Git Integration
+- **Fugitive**: Full git workflow integration
+- **GitSigns**: Inline git change indicators and hunks
 
 ### Built-in Neovim
 - **Normal Mode**: Navigate and edit efficiently
@@ -108,17 +120,19 @@ On first startup, Lazy.nvim will automatically install all plugins and Mason wil
 │   ├── 📁 config/
 │   │   └── 📄 lazy.lua      # Lazy.nvim plugin manager setup
 │   └── 📁 plugins/
-│       ├── 📄 cmp.lua       # Completion configuration
+│       ├── 📄 cmp.lua       # Blink.cmp completion configuration
 │       ├── 📄 copilot.lua   # GitHub Copilot setup
-│       ├── 📄 git-conf.lua  # Git integration
-│       ├── 📄 lsp.lua       # Language Server Protocol
-│       ├── 📄 mini.lua      # Mini.nvim modules
-│       ├── 📄 oil.lua       # File explorer
+│       ├── 📄 git-conf.lua  # Git integration (Fugitive + GitSigns)
+│       ├── 📄 indent-blankline.lua # Indentation guides
+│       ├── 📄 lsp.lua       # Language Server Protocol + Mason
+│       ├── 📄 mini.lua      # Mini.nvim modules (statusline, icons)
+│       ├── 📄 oil.lua       # File explorer configuration
 │       ├── 📄 remap.lua     # Custom keybindings
 │       ├── 📄 statusline.lua # Status line configuration
-│       ├── 📄 telescope.lua # Fuzzy finder
+│       ├── 📄 telescope.lua # Fuzzy finder setup
+│       ├── 📄 terminal.lua  # ToggleTerm configuration
 │       └── 📄 treesitter.lua # Syntax highlighting
-└── 📄 README.md             # This file
+└── 📄 README.md             # This documentation
 ```
 
 ## 🔧 Customization
@@ -153,15 +167,6 @@ This configuration uses [Lazy.nvim](https://github.com/folke/lazy.nvim) for plug
 - **Plugin status**: `:Lazy`
 - **Clean unused**: `:Lazy clean`
 
-## 🐛 Troubleshooting
-
-### Common Issues
-
-1. **LSP not working**: Ensure Mason has installed the language servers (`:Mason`)
-2. **Icons not displaying**: Install a Nerd Font and configure your terminal
-3. **Slow startup**: Check for plugin conflicts or network issues
-4. **Copilot not working**: Verify GitHub Copilot subscription and authentication
-
 ### Getting Help
 - Check `:checkhealth` for configuration issues
 - Review plugin documentation for specific features
@@ -183,14 +188,18 @@ This configuration is open source and available under the [MIT License](LICENSE)
 ## 🙏 Acknowledgments
 
 Built with amazing plugins from the Neovim community:
-- [Lazy.nvim](https://github.com/folke/lazy.nvim) - Plugin manager
-- [Catppuccin](https://github.com/catppuccin/nvim) - Beautiful theme
-- [Telescope](https://github.com/nvim-telescope/telescope.nvim) - Fuzzy finder
-- [Treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - Syntax highlighting
-- [Mason](https://github.com/williamboman/mason.nvim) - LSP installer
-- [Blink.cmp](https://github.com/saghen/blink.cmp) - Completion engine
-- [Oil.nvim](https://github.com/stevearc/oil.nvim) - File explorer
-- [Mini.nvim](https://github.com/echasnovski/mini.nvim) - Swiss Army knife
+- [Lazy.nvim](https://github.com/folke/lazy.nvim) - Modern plugin manager
+- [Catppuccin](https://github.com/catppuccin/nvim) - Beautiful pastel theme
+- [Telescope](https://github.com/nvim-telescope/telescope.nvim) - Fuzzy finder and picker
+- [Treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - Advanced syntax highlighting
+- [Mason](https://github.com/williamboman/mason.nvim) - LSP/formatter installer
+- [Blink.cmp](https://github.com/saghen/blink.cmp) - Fast completion engine
+- [Oil.nvim](https://github.com/stevearc/oil.nvim) - File explorer as a buffer
+- [Mini.nvim](https://github.com/echasnovski/mini.nvim) - Swiss Army knife collection
+- [ToggleTerm](https://github.com/akinsho/toggleterm.nvim) - Terminal integration
+- [Fugitive](https://github.com/tpope/vim-fugitive) - Git workflow
+- [GitSigns](https://github.com/lewis6991/gitsigns.nvim) - Git change indicators
+- [GitHub Copilot](https://github.com/github/copilot.vim) - AI code assistance
 
 ---
 
