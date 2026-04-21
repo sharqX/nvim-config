@@ -1,4 +1,3 @@
--- lua/plugins/lsp.lua
 return {
   {
     "neovim/nvim-lspconfig",
@@ -8,10 +7,8 @@ return {
       "saghen/blink.cmp",
     },
     config = function()
-      -- Blink CMP Capabilities
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-      -- Extend with your custom settings
       capabilities.textDocument = capabilities.textDocument or {}
       capabilities.textDocument.semanticTokens = vim.tbl_deep_extend(
         "force",
@@ -20,9 +17,9 @@ return {
           multilineTokenSupport = true,
         }
       )
-      vim.lsp.config("*", { capabilities = capabilities })
 
-      -- Mason install/bridge
+      local lspconfig = require("lspconfig")
+
       require("mason").setup()
       require("mason-lspconfig").setup({
         ensure_installed = {
@@ -43,43 +40,15 @@ return {
           "yamlls",
         },
         automatic_installation = true,
+        handlers = {
+          function(server_name)
+            lspconfig[server_name].setup({
+              capabilities = capabilities,
+            })
+          end,
+        },
       })
 
-      -- Configure servers (new Neovim 0.11+ API)
-      vim.lsp.config("vimls", {})
-      vim.lsp.config("lua_ls", {})
-      vim.lsp.config("bashls", {})
-      vim.lsp.config("clangd", {})
-      vim.lsp.config("cssls", {})
-      vim.lsp.config("dockerls", {})
-      vim.lsp.config("docker_compose_language_service", {})
-      vim.lsp.config("gopls", {})
-      vim.lsp.config("helm_ls", {})
-      vim.lsp.config("html", {})
-      vim.lsp.config("jsonls", {})
-      vim.lsp.config("pyright", {})
-      vim.lsp.config("terraformls", {})
-      vim.lsp.config("ts_ls", {}) -- replaces tsserver
-      vim.lsp.config("yamlls", {})
-
-      -- Enable them (start on matching buffers)
-      vim.lsp.enable("vimls")
-      vim.lsp.enable("lua_ls")
-      vim.lsp.enable("bashls")
-      vim.lsp.enable("clangd")
-      vim.lsp.enable("cssls")
-      vim.lsp.enable("dockerls")
-      vim.lsp.enable("docker_compose_language_service")
-      vim.lsp.enable("gopls")
-      vim.lsp.enable("helm_ls")
-      vim.lsp.enable("html")
-      vim.lsp.enable("jsonls")
-      vim.lsp.enable("pyright")
-      vim.lsp.enable("terraformls")
-      vim.lsp.enable("ts_ls")
-      vim.lsp.enable("yamlls")
-
-      -- Auto format on saving --
       vim.api.nvim_create_autocmd("BufWritePre", {
         pattern = "*",
         callback = function()
@@ -87,7 +56,6 @@ return {
         end,
       })
 
-      -- (Optional) Nice defaults
       vim.diagnostic.config({
         virtual_text = true,
         signs = true,
@@ -95,22 +63,11 @@ return {
         update_in_insert = false,
         severity_sort = true,
       })
-      -- Keymaps --
+
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
       vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
-    end,
-  },
-
-  {
-    "nvimtools/none-ls.nvim",
-    config = function()
-      local null_ls = require("null-ls")
-
-      null_ls.setup({
-        sources = {
-          null_ls.builtins.formatting.black, -- Python
-        },
-      })
+      vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to References" })
+      vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
     end,
   },
 }

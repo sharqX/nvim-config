@@ -5,7 +5,7 @@ return {
     open_mapping = [[<c-\>]],
     terminal_mappings = true,
     start_in_insert = true,
-    shell = "pwsh",
+    shell = "zsh",
     winbar = {
       enabled = true,
       name_formatter = function(term) --  term: Terminal
