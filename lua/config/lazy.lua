@@ -24,19 +24,39 @@ vim.g.maplocalleader = "\\"
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
-    -- Catppuccin Theme:  Mocha is the best --
-    { "catppuccin/nvim",                 name = "catppuccin", priority = 1000 },
-    
+    -- -- Catppuccin Theme:  Mocha is the best --
+    -- { "catppuccin/nvim",                 name = "catppuccin", priority = 1000 },
+    --
+    -- {
+    --   "folke/tokyonight.nvim",
+    --   lazy = false,
+    --   priority = 1000,
+    --   opts = {},
+    -- },
+
+    {
+      "rktjmp/lush.nvim",
+      lazy = false,
+    },
+
     -- Treesitter --
-    { "nvim-treesitter/nvim-treesitter", branch = 'master',   lazy = false,   build = ":TSUpdate" },
+    { "nvim-treesitter/nvim-treesitter", branch = 'master', lazy = false, build = ":TSUpdate" },
     -- Import Plugins --
     { import = "plugins" },
   }
 
 })
 
--- setup must be called before loading
-vim.cmd.colorscheme "catppuccin-mocha"
+-- Load custom theme after plugins are installed
+vim.defer_fn(function()
+  vim.opt.termguicolors = true
+  vim.opt.rtp:prepend(vim.fn.stdpath("data") .. "/lazy/lush.nvim")
+  package.path = package.path .. ";/Users/shariquezararrahman/.config/nvim/lua/theme/?.lua"
+  local theme = require("myLushTheme")
+  local lush = require("lush")
+  lush.apply(theme)
+end, 100)
+
 
 -- Indent Blankline --
 local highlight = {
