@@ -5,13 +5,16 @@ return {
     open_mapping = [[<c-\>]],
     terminal_mappings = true,
     start_in_insert = true,
-    shell = "zsh",
+    shell = "pwsh",
     winbar = {
       enabled = true,
       name_formatter = function(term) --  term: Terminal
         return term.name
       end
     },
-    vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], { noremap = true, silent = true }),
   },
+  config = function(_, opts)
+    require("toggleterm").setup(opts)
+    vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
+  end,
 }
