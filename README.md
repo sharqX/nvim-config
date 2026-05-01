@@ -5,10 +5,10 @@ A carefully crafted Neovim configuration built for modern development workflows.
 ## ✨ Features
 
 ### 🎨 Visual & Theme
-- **Catppuccin Theme**: Beautiful, modern colorscheme with automatic light/dark mode switching
+- **Lush Theme**: Custom colorscheme built with Lush.nvim
 - **Mini.nvim Statusline**: Clean and informative status line with icons
 - **Syntax Highlighting**: Advanced syntax highlighting powered by Treesitter
-- **Indent Guides**: Visual indentation lines for better code structure
+- **Indent Guides**: Rainbow indentation lines for better code structure via IBL
 - **Mini Icons**: Consistent iconography throughout the interface
 
 ### 🔧 Core Functionality
@@ -19,15 +19,15 @@ A carefully crafted Neovim configuration built for modern development workflows.
 - **Integrated Terminal**: ToggleTerm for seamless terminal access with PowerShell support
 - **Git Integration**: Advanced git workflow with Fugitive and GitSigns
 
-### 🤖 AI & Productivity
-- **GitHub Copilot**: AI-powered code suggestions and completion
+### 🛠️ Productivity
 - **Treesitter**: Advanced syntax parsing and code understanding
-- **Auto-formatting**: Consistent code formatting with none-ls integration
-- **Code Actions**: Quick fixes and refactoring suggestions
+- **Auto-formatting**: Consistent code formatting on save via native LSP
+- **Code Actions**: Quick fixes and refactoring suggestions via LSP
 
 ### 🛠️ Language Support
 Out-of-the-box support for:
 - **Lua** (Neovim configuration)
+- **Vim Script** (via vimls)
 - **Bash/Shell scripting**
 - **C/C++** (via clangd)
 - **CSS/HTML** (web development)
@@ -35,9 +35,9 @@ Out-of-the-box support for:
 - **Go** (backend development)
 - **Helm** (Kubernetes charts)
 - **JSON/YAML** (configuration files)
-- **Python** (data science & backend)
+- **Python** (via pyright)
 - **Terraform** (infrastructure as code)
-- **TypeScript/JavaScript** (frontend development)
+- **TypeScript/JavaScript** (via ts_ls)
 
 ## 📋 Prerequisites
 
@@ -47,7 +47,6 @@ Out-of-the-box support for:
 - **Python** >= 3.8 (for Python LSP support)
 - **PowerShell** (Windows) or your preferred shell
 - A **Nerd Font** (required for icons - recommended: [JetBrains Mono Nerd Font](https://www.nerdfonts.com/))
-- **GitHub Account** (for Copilot integration)
 
 ## 🚀 Installation
 
@@ -95,10 +94,13 @@ On first startup, Lazy.nvim will automatically install all plugins and Mason wil
 |----------|--------|-------------|
 | `<leader>ff` | Find Files | Open Telescope file finder |
 | `<leader>fg` | Live Grep | Search text across project |
-| `<leader>ce` | Enable Copilot | Activate GitHub Copilot |
-| `<leader>cd` | Disable Copilot | Deactivate GitHub Copilot |
+| `<leader>e` | File Explorer | Open Oil.nvim file browser |
+| `<leader>w` | Save | Write current buffer |
+| `<leader>q` | Quit | Close current window |
+| `<leader>h` | Clear Search | Remove search highlighting |
 | `<C-\>` | Toggle Terminal | Open/close integrated terminal |
 | `<Esc>` | Exit Terminal Mode | Return to normal mode from terminal |
+| `<C-f>` | Format | Format current buffer with LSP |
 
 ### Git Integration
 - **Fugitive**: Full git workflow integration
@@ -118,20 +120,20 @@ On first startup, Lazy.nvim will automatically install all plugins and Mason wil
 ├── 📄 lazy-lock.json        # Plugin version lockfile
 ├── 📁 lua/
 │   ├── 📁 config/
-│   │   └── 📄 lazy.lua      # Lazy.nvim plugin manager setup
-│   └── 📁 plugins/
-│       ├── 📄 cmp.lua       # Blink.cmp completion configuration
-│       ├── 📄 copilot.lua   # GitHub Copilot setup
-│       ├── 📄 git-conf.lua  # Git integration (Fugitive + GitSigns)
-│       ├── 📄 indent-blankline.lua # Indentation guides
-│       ├── 📄 lsp.lua       # Language Server Protocol + Mason
-│       ├── 📄 mini.lua      # Mini.nvim modules (statusline, icons)
-│       ├── 📄 oil.lua       # File explorer configuration
-│       ├── 📄 remap.lua     # Custom keybindings
-│       ├── 📄 statusline.lua # Status line configuration
-│       ├── 📄 telescope.lua # Fuzzy finder setup
-│       ├── 📄 terminal.lua  # ToggleTerm configuration
-│       └── 📄 treesitter.lua # Syntax highlighting
+│   │   └── 📄 lazy.lua      # Lazy.nvim plugin manager + theme setup
+│   ├── 📁 plugins/
+│   │   ├── 📄 cmp.lua       # Blink.cmp completion configuration
+│   │   ├── 📄 git-conf.lua  # Git integration (Fugitive + GitSigns)
+│   │   ├── 📄 indent-blankline.lua # Rainbow indentation guides (IBL)
+│   │   ├── 📄 lsp.lua       # Language Server Protocol + Mason
+│   │   ├── 📄 mini.lua      # Mini.nvim modules (statusline, icons)
+│   │   ├── 📄 oil.lua       # File explorer configuration
+│   │   ├── 📄 remap.lua     # Custom keybindings
+│   │   ├── 📄 telescope.lua # Fuzzy finder setup
+│   │   ├── 📄 terminal.lua  # ToggleTerm configuration
+│   │   └── 📄 treesitter.lua # Syntax highlighting
+│   └── 📁 theme/
+│       └── 📄 myLushTheme.lua # Custom Lush theme
 └── 📄 README.md             # This documentation
 ```
 
@@ -149,11 +151,7 @@ ensure_installed = {
 ```
 
 ### Modifying Theme
-The Catppuccin theme can be customized in `lua/config/lazy.lua`. Available flavors:
-- `latte` (light)
-- `frappe` (dark)
-- `macchiato` (dark)
-- `mocha` (dark, default)
+The custom Lush theme can be modified in `lua/theme/myLushTheme.lua`. The theme is applied via `lua/config/lazy.lua` using the Lush.nvim framework.
 
 ### Adding Custom Keybindings
 Create or modify keybindings in `lua/plugins/remap.lua` or within individual plugin configurations.
@@ -189,7 +187,7 @@ This configuration is open source and available under the [MIT License](LICENSE)
 
 Built with amazing plugins from the Neovim community:
 - [Lazy.nvim](https://github.com/folke/lazy.nvim) - Modern plugin manager
-- [Catppuccin](https://github.com/catppuccin/nvim) - Beautiful pastel theme
+- [Lush.nvim](https://github.com/rktjmp/lush.nvim) - Colorscheme creation framework
 - [Telescope](https://github.com/nvim-telescope/telescope.nvim) - Fuzzy finder and picker
 - [Treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - Advanced syntax highlighting
 - [Mason](https://github.com/williamboman/mason.nvim) - LSP/formatter installer
@@ -199,7 +197,7 @@ Built with amazing plugins from the Neovim community:
 - [ToggleTerm](https://github.com/akinsho/toggleterm.nvim) - Terminal integration
 - [Fugitive](https://github.com/tpope/vim-fugitive) - Git workflow
 - [GitSigns](https://github.com/lewis6991/gitsigns.nvim) - Git change indicators
-- [GitHub Copilot](https://github.com/github/copilot.vim) - AI code assistance
+- [IBL](https://github.com/lukas-reineke/indent-blankline.nvim) - Indentation guides
 
 ---
 
