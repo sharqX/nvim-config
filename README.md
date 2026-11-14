@@ -76,3 +76,7 @@ nvim --headless "+qa" 2>&1
 ```
 
 Or open `nvim` and run `:checkhealth`.
+
+## Inspo
+
+- [Effective Neovim Setup for Agentic Coding, Towards 2027](https://www.devas.life/effective-neovim-setup-for-agentic-coding-towards-2027/)
