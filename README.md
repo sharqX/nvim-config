@@ -69,6 +69,79 @@ Toggle format-on-save for the current buffer with `:ToggleFormatter`.
 - Lua files are tab-indented (stylua defaults); other filetypes use 2-space indentation.
 - Keymaps use a custom `map({...})` table helper in `plugins/keymaps.lua`.
 
+## Keymaps
+
+Defined in `lua/craftzdog/config/keymaps.lua` (general) and `lua/craftzdog/plugins/keymaps.lua` (plugin-specific).
+
+### General
+
+| Key | Action |
+| --- | --- |
+| `x` | Delete char without yanking (black hole register) |
+| `<leader>p` / `<leader>P` | Paste from last-yank register (n + v for `p`) |
+| `<leader>c` / `<leader>C` | Change into black hole register (n + v) |
+| `<leader>d` / `<leader>D` | Delete into black hole register (n + v) |
+| `+` / `-` | Increment / decrement number |
+| `dw` | Delete word backwards |
+| `<C-a>` | Select all |
+| `<leader>o` / `<leader>O` | New line without auto-continuing comments |
+| `<C-m>` | Jump forward in jumplist |
+| `ZR` | Restart nvim, restoring windows, tabs, and buffers |
+| `te` | Open a new tab |
+| `<tab>` / `<s-tab>` | Next / previous tab |
+| `ss` / `sv` | Horizontal / vertical split |
+| `sh` `sk` `sj` `sl` | Move between windows |
+| `<leader>yf` / `<leader>yp` | Yank file path with line number (relative / absolute) |
+| `<leader>cc` (visual) | Copy selection as a code block |
+| `<leader>j` | Open `package.json` in floating window |
+| `<leader>bd` | Delete hidden buffers |
+
+### Files & pickers (Snacks)
+
+| Key | Action |
+| --- | --- |
+| `sf` | Toggle file explorer (Oil) |
+| `;f` | Find files |
+| `;r` | Live grep |
+| `;;` | Resume last picker |
+| `\\` | List buffers (jumps to open window if visible) |
+| `;e` | Diagnostics |
+| `;n` | Notifications |
+| `;g` | Lazygit |
+| `;h` | Git diff (hunks) |
+| `]]` / `[[` | Next / previous reference (Snacks words) |
+
+### LSP
+
+| Key | Action |
+| --- | --- |
+| `gd` | Goto definition |
+| `gD` | Goto declaration |
+| `gy` | Goto type definition |
+| `gI` | Goto source definition (vtsls) / implementation |
+| `gr` | References |
+| `K` | Hover |
+| `gK` / `<C-k>` (insert) | Signature help |
+| `<C-j>` | Jump to next diagnostic |
+| `<leader>ca` | Code action (n + x) |
+| `<leader>cr` | Rename symbol |
+| `<leader>cl` | LSP info |
+| `<leader>cR` | Rename file |
+| `<leader>f` | Format (n + x) |
+
+### Git
+
+| Key | Action |
+| --- | --- |
+| `<leader>gb` | Blame current line |
+| `<leader>gB` | Blame buffer |
+| `<leader>go` | Open file at blamed commit |
+| `<leader>gs` | Toggle stage buffer |
+| `<leader>gh` | Toggle stage hunk |
+| `<leader>gd` | Toggle MiniDiff overlay |
+| `<leader>dv` | Toggle CodeDiff |
+| `<leader>dh` / `<leader>dH` | File history (current file / repo) |
+
 ## Verify
 
 ```powershell
